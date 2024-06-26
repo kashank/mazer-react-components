@@ -1,12 +1,12 @@
 {
   "name": "mazer-react-components",
   "private": false,
-  "version": "0.0.3",
+  "version": "0.0.5",
   "type": "module",
   "types": "dist/index.d.ts",
-  "main":"dist/mazer-react-components.umd.js",
-  "module":"dist/mazer-react-components.es.js",
-  "files":[
+  "main": "dist/mazer-react-components.umd.js",
+  "module": "dist/mazer-react-components.es.js",
+  "files": [
     "dist"
   ],
   "author": {
@@ -15,6 +15,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
+    "watch": "tsc-watch --onSuccess 'vite build'",
     "build": "tsc --project tsconfig.build.json && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -38,6 +39,7 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "tsc-watch": "^6.2.0",
     "typescript": "^5.5.2",
     "vite": "^5.3.1"
   }

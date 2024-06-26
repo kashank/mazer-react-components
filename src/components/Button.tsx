@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTheme } from './ThemeProvider';
+import { useTheme } from './MazerThemeProvider';
 
 const Button: React.FC<{ label: string }> = ({ label }) => {
   const { theme } = useTheme();
