@@ -26,7 +26,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "tsconfig.build.json"],
+  "include": ["src", "src/types", "tsconfig.build.json"],
   "exclude": [
     "node_modules",
     "**/*.test.ts",

@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'path';
 
 export default defineConfig({
@@ -12,7 +13,15 @@ export default defineConfig({
       outputDir: 'dist',
       insertTypesEntry: true
     }),
-    cssInjectedByJsPlugin()
+    cssInjectedByJsPlugin(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'src/assets/mazer/assets/static/js/components/sidebar.js', 
+          dest: 'assets/static/js/components'
+        }
+      ]
+    })
   ],
   resolve: {
     alias: {
