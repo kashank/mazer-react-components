@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTheme } from './MazerThemeProvider';
 
-const ThemeToggle: React.FC<{}> = () => {
+export const ThemeToggle: React.FC<{}> = () => {
   const { toggleTheme } = useTheme();
   
   return (
@@ -61,5 +61,3 @@ const ThemeToggle: React.FC<{}> = () => {
   </div>
   );
 };
-
-export default ThemeToggle;

@@ -1,3 +1,4 @@
-export { default as Button } from './Button';
+export { Button } from './Button';
 export { MazerThemeProvider, useTheme } from './MazerThemeProvider';
-export {default as ThemeToggle} from './ThemeToggle';
+export {ThemeToggle} from './ThemeToggle';
+export {DefaultLayout} from './layouts/DefaultLayout';

@@ -26,5 +26,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "tsconfig.build.json"]
+  "include": ["src", "tsconfig.build.json"],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "src/assets/mazer/**/src/**/*"
+  ]
 }

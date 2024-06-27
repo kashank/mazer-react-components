@@ -1,14 +1,42 @@
 {
   "compilerOptions": {
     "composite": true,
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-    "skipLibCheck": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
     "moduleResolution": "bundler",
-    "esModuleInterop": true, 
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": false,
+    "jsx": "react-jsx",  
+
+    /* Add esModuleInterop flag */
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+
+    /* Linting */
     "strict": true,
-    "noEmit": true
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Declaration */
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "sourceMap": true,
+    "outDir": "dist"
   },
-  "include": ["vite.config.ts"]
+  "include": ["src", "tsconfig.build.json"],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "src/assets/mazer/assets/extensions/choices.js/src/scripts/store/store.test.ts"
+  ]
 }
