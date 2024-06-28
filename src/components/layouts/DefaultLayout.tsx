@@ -7,7 +7,9 @@ export const DefaultLayout: React.FC = () => {
   
   return (
     <>
-      <Sidebar sidebarContent={sideBarContent}></Sidebar>
+      <Sidebar>
+        {sideBarContent}
+      </Sidebar>
       <div id="main">
         <header className="mb-3">
           <a href="#" className="burger-btn d-block d-xl-none">

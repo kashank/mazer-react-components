@@ -2,18 +2,33 @@ import * as React from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 interface SidebarProps {
-  sidebarContent?: React.ReactNode;
+  children: React.ReactNode;
 }
 
-interface SidebarLink extends SidebarItem {
-  href: string;
-  image?: string;
+interface SidebarItemProps {
+  header?: string;
+  link?: string;
+  linkText?: string;
+  subItems?: React.ReactNode;
 }
 
-export interface SidebarItem {
-  text: string;
-  subItems?: SidebarItem[];
-  isTitle: boolean;
+export const SidebarItem: React.FC<SidebarItemProps> = (props: SidebarItemProps) => {
+  return (
+    <>
+      {props.header && !props.link &&
+        <li className="sidebar-title">
+          {props.header}
+        </li>
+      }
+
+      {
+        props.linkText && !props.header &&
+        <li className="sidebar-item">
+          <a href={props.link ?? '#'} className="sidebar-link">{props.linkText}</a>
+        </li>
+      }
+    </>
+  );
 }
 
 export const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
@@ -40,13 +55,9 @@ export const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
         </div>
         <div className="sidebar-menu">
           <ul className="menu">
-          {
-            props.sidebarContent &&
-            
-            props.sidebarContent
-            
-          }
-          
+            {
+              props.children
+            }
           </ul>
         </div>
       </div>

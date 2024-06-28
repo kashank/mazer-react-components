@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@assets/mazer/assets/compiled/css/app.css';
 import '@assets/mazer/assets/compiled/css/app-dark.css';
 import '@assets/mazer/assets/compiled/css/iconly.css';
+import { SidebarItem } from './Sidebar';
 
 type MazerLayoutType = 'default' | 'single-column' | 'vertical-navbar';
 
