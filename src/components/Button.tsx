@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { useTheme } from './MazerThemeProvider';
+import { useLayout } from './MazerLayoutProvider';
 
 export const Button: React.FC<{ label: string }> = ({ label }) => {
-  const { theme } = useTheme();
+  const { themeTone } = useLayout();
   return (
-    <button className={`btn btn-${theme === 'light' ? 'primary' : 'secondary'}`}>
+    <button className={`btn btn-${themeTone === 'light' ? 'primary' : 'secondary'}`}>
       {label}
     </button>
   );

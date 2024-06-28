@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { useTheme } from './MazerThemeProvider';
+import { useLayout } from './MazerLayoutProvider';
 
 export const ThemeToggle: React.FC<{}> = () => {
-  const { toggleTheme } = useTheme();
+  const { toggleThemeTone } = useLayout();
   
   return (
     <div className="theme-toggle d-flex gap-2  align-items-center mt-2">
@@ -39,7 +39,7 @@ export const ThemeToggle: React.FC<{}> = () => {
         className="form-check-input me-0"
         type="checkbox"
         id="toggle-dark"
-        onClick={()=>toggleTheme()}
+        onClick={()=>toggleThemeTone()}
       ></input>
       <label className="form-check-label"></label>
     </div>
