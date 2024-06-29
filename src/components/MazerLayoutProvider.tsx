@@ -3,13 +3,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '@assets/mazer/assets/compiled/css/app.css';
 import '@assets/mazer/assets/compiled/css/app-dark.css';
 import '@assets/mazer/assets/compiled/css/iconly.css';
-import { SidebarItem } from './SidebarItem';
 
 type MazerLayoutType = 'default' | 'single-column' | 'vertical-navbar';
 
 interface MazerLayoutConfig {
   type: MazerLayoutType; 
   sideBarContent?: React.ReactNode;
+  sideBarLogo?: string;
   mainContent: React.ReactNode;
   themeTone: string;
   toggleThemeTone: () => void;
