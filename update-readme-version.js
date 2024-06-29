@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const packageJson = require('./package.json');
+const fs = import('fs');
+const path = import('path');
+const packageJson = import('./package.json');
 
 const readmePath = path.join(__dirname, 'README.md');
 let readmeContent = fs.readFileSync(readmePath, 'utf-8');
