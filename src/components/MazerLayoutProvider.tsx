@@ -4,12 +4,12 @@ import '@assets/mazer/assets/compiled/css/app.css';
 import '@assets/mazer/assets/compiled/css/app-dark.css';
 import '@assets/mazer/assets/compiled/css/iconly.css';
 
-type MazerLayoutType = 'default' | 'single-column' | 'vertical-navbar';
+type MazerLayoutType = 'default' | 'single' | 'vertical-navbar';
 
 interface MazerLayoutConfig {
   type: MazerLayoutType; 
   sideBarContent?: React.ReactNode;
-  sideBarLogo?: string;
+  logo?: string;
   mainContent: React.ReactNode;
   themeTone: string;
   toggleThemeTone: () => void;

@@ -3,7 +3,7 @@ import { Sidebar } from "../Sidebar";
 import { useLayout } from "../MazerLayoutProvider";
 
 export const DefaultLayout: React.FC = () => {
-  const {sideBarContent, sideBarLogo, mainContent } = useLayout();
+  const {sideBarContent, logo: sideBarLogo, mainContent } = useLayout();
   
   return (
     <>
