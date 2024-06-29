@@ -15,7 +15,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "update-readme-version": "node update-readme-version.js",
+    "update-readme-version": "node update-readme-version.cjs",
     "prepublishOnly": "npm run update-readme-version",
     "watch": "chokidar \"src/**/*\" -c \"npm run build\"",
     "build": "tsc --project tsconfig.build.json && vite build",
