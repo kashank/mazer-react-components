@@ -4,6 +4,10 @@
 
 This library is a wrapper for the open source bootstrap 5 theme [Mazer](https://github.com/zuramai/mazer) by [Saugi](https://github.com/zuramai). It provides a set of React components to help build consistent layouts and sidebars for your applications. It ensures that the end-implementing app doesn't have to worry about layout or design, providing a structured way to define sidebar items and layouts.
 
+## Attribution
+
+ - [Mazer](https://github.com/zuramai/mazer) by [Saugi](https://github.com/zuramai)
+ - [Bootstrap](https://github.com/twbs/bootstrap) by [twbs](https://github.com/twbs/bootstrap)
 
 ## Features
 
