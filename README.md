@@ -1,13 +1,13 @@
 # Mazer React Components
 
-> **Note**: This is a minor alpha release (0.0.6-alpha.2). This version is still in development and may contain bugs or incomplete features.
+> **Note**: This is a minor alpha release (0.0.6-alpha.3). This version is still in development and may contain bugs or incomplete features.
 
 This library is a wrapper for the open source bootstrap 5 theme [Mazer](https://github.com/zuramai/mazer) by [Saugi](https://github.com/zuramai). It provides a set of React components to help build consistent layouts and sidebars for your applications. It ensures that the end-implementing app doesn't have to worry about layout or design, providing a structured way to define sidebar items and layouts.
 
 
 ## Features
 
-- **Layout Setup**: Use different layouts like `DefaultLayout`, `SingleColumnLayout`, and `VerticalNavbarLayout`.
+- **Layout Setup**: Use different layouts like `DefaultLayout`, `SingleLayout`, and `VerticalNavbarLayout`.
 - **Sidebar**: Define sidebars with nested sidebar items.
 - **Context Management**: Easily manage layout configurations using React Context.
 
@@ -70,7 +70,7 @@ You can use different layout types by changing the type in the layout configurat
 #### Default Layout
 ```tsx
 const layoutConfig = {
-  type: 'single-column',
+  type: 'single',
   mainContent: (
     <>
       <h1>Single Column Page</h1>
@@ -82,7 +82,7 @@ const layoutConfig = {
 #### Single Column Layout
 ```tsx
 const layoutConfig = {
-  type: 'single-column',
+  type: 'single',
   mainContent: (
     <>
       <h1>Single Column Page</h1>
@@ -181,13 +181,13 @@ const homeLayoutConfig = {
   mainContent: <div>Main Content for Home</div>,
 };
 
-const singleColumnLayoutConfig = {
-  type: 'single-column',
+const singleLayoutConfig = {
+  type: 'single',
   mainContent: <div>Main Content for Single Column Page</div>,
 };
 
 export const HomeWithLayout = withLayout(Home, homeLayoutConfig);
-export const SingleColumnPageWithLayout = withLayout(SingleColumnPage, singleColumnLayoutConfig);
+export const SingleColumnPageWithLayout = withLayout(SingleColumnPage, singleLayoutConfig);
 ```
 
 ### Centralize Layout Management with Routes
@@ -214,10 +214,10 @@ const routes = [
     },
   },
   {
-    path: '/single-column',
+    path: '/single',
     component: SingleColumnPage,
     layoutConfig: {
-      type: 'single-column',
+      type: 'single',
       mainContent: <div>Main Content for Single Column Page</div>,
     },
   },
@@ -295,7 +295,7 @@ const Home: React.FC = () => (
 
 const SingleColumnPage: React.FC = () => (
   <LayoutWrapper layoutConfig={{
-    type: 'single-column',
+    type: 'single',
     mainContent: <div>Main Content for Single Column Page</div>,
   }}>
     <h1>Single Column Page</h1>
