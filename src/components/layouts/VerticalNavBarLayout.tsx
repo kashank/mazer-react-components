@@ -138,7 +138,7 @@ export const VerticalNavBarLayout: React.FC<VerticalNavBarLayoutProps> = (
                   <ul
                     className="dropdown-menu dropdown-menu-end"
                     aria-labelledby="dropdownMenuButton"
-                    style={{ minWidth: "11rem;" }}
+                    style={{ minWidth: "11rem" }}
                   >
                     <li>
                       <h6 className="dropdown-header">Hello, John!</h6>
