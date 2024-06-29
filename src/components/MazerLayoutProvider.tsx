@@ -12,6 +12,7 @@ interface MazerLayoutConfig {
   navBarContent?: React.ReactNode;
   mainContent: React.ReactNode;
   logo?: string;
+  backLink?: string;
   themeTone: string;
   toggleThemeTone: () => void;
 }

@@ -1,18 +1,14 @@
 import * as React from "react";
 import { useLayout } from "../MazerLayoutProvider";
 
-interface SingleLayoutProps {
-  backLink?: string;
-}
-
-export const SingleLayout: React.FC<SingleLayoutProps> = (props: SingleLayoutProps) => {
-  const { mainContent, logo } = useLayout();
+export const SingleLayout: React.FC = () => {
+  const { mainContent, logo, backLink} = useLayout();
 
   return (
     <>
       <nav className="navbar navbar-light">
         <div className="container d-block">
-          <a href={props.backLink ?? "#"}><i className="bi bi-chevron-left"></i></a>
+          <a href={backLink ?? "#"}><i className="bi bi-chevron-left"></i></a>
           {logo &&
             <a className="navbar-brand ms-4" href="index.html">
               <img src={logo} />
