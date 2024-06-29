@@ -2,14 +2,8 @@ import * as React from "react";
 import { useLayout } from "../MazerLayoutProvider";
 import { Sidebar } from "../Sidebar";
 
-interface VerticalNavBarLayoutProps {
-  backLink?: string;
-}
-
-export const VerticalNavBarLayout: React.FC<VerticalNavBarLayoutProps> = (
-  props: VerticalNavBarLayoutProps
-) => {
-  const { mainContent, logo, sideBarContent } = useLayout();
+export const VerticalNavBarLayout: React.FC = () => {
+  const { mainContent, logo, sideBarContent, navBarContent } = useLayout();
 
   return (
     <>
@@ -37,7 +31,12 @@ export const VerticalNavBarLayout: React.FC<VerticalNavBarLayoutProps> = (
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
-                <ul className="navbar-nav ms-auto mb-lg-0">
+                {navBarContent && 
+                <div className="navbar-nav ms-auto mb-lg-0">
+                  {navBarContent}
+                  </div>
+                }
+                {/* <ul className="navbar-nav ms-auto mb-lg-0">
                   <li className="nav-item dropdown me-1">
                     <a
                       className="nav-link active dropdown-toggle text-gray-600"
@@ -171,7 +170,7 @@ export const VerticalNavBarLayout: React.FC<VerticalNavBarLayoutProps> = (
                       </a>
                     </li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
           </nav>

@@ -9,8 +9,9 @@ type MazerLayoutType = 'default' | 'single' | 'vertical-navbar';
 interface MazerLayoutConfig {
   type: MazerLayoutType; 
   sideBarContent?: React.ReactNode;
-  logo?: string;
+  navBarContent?: React.ReactNode;
   mainContent: React.ReactNode;
+  logo?: string;
   themeTone: string;
   toggleThemeTone: () => void;
 }
