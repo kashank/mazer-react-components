@@ -17,7 +17,7 @@
     "dev": "vite",
     "watch": "chokidar \"src/**/*\" -c \"npm run build\"",
     "build": "tsc --project tsconfig.build.json && vite build",
-    "build2":"npx tsc --project tsconfig.build.json",
+    "build2": "npx tsc --project tsconfig.build.json",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -25,6 +25,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "vite-plugin-dts": "^2.1.0"

@@ -32,9 +32,9 @@ export const VerticalNavBarLayout: React.FC = () => {
                 id="navbarSupportedContent"
               >
                 {navBarContent && 
-                <div className="navbar-nav ms-auto mb-lg-0">
+                <ul className="navbar-nav ms-auto mb-lg-0">
                   {navBarContent}
-                  </div>
+                </ul>
                 }
                 {/* <ul className="navbar-nav ms-auto mb-lg-0">
                   <li className="nav-item dropdown me-1">
