@@ -1,13 +1,15 @@
 import React from "react";
 
-interface VerticalNavbarDropDownProps {
+interface MazerNavbarDropdownProps {
   icon?: string;
   title?: string;
+  badgeText?: string;
+  badgeStyle?: string;
   children?: React.ReactNode;
 }
 
-export const VerticalNavbarDropDown: React.FC<VerticalNavbarDropDownProps> = (
-  props: VerticalNavbarDropDownProps
+export const MazerNavbarDropdown: React.FC<MazerNavbarDropdownProps> = (
+  props: MazerNavbarDropdownProps
 ) => {
   return (
     <>
@@ -20,6 +22,9 @@ export const VerticalNavbarDropDown: React.FC<VerticalNavbarDropDownProps> = (
               {props.icon && (
                 <i className={`bi bi-${props.icon} bi-sub fs-4`}></i>
               )}
+              {props.badgeText &&
+                <span className={`badge badge-notification bg-${props.badgeStyle ?? 'danger'}`}>{props.badgeText}</span>
+              }
             </a>
             <ul className="dropdown-menu dropdown-menu-lg-end">
               <li>

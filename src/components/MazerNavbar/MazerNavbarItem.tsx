@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface VerticalNavbarItemProps {
+interface MazerNavbarItemProps {
   text?: string;
   href?: string;
   icon?: string;
@@ -9,7 +9,7 @@ interface VerticalNavbarItemProps {
   children?: React.ReactNode;
 }
 
-export const VerticalNavbarItem: React.FC<VerticalNavbarItemProps> = (props: VerticalNavbarItemProps) => {
+export const MazerNavbarItem: React.FC<MazerNavbarItemProps> = (props: MazerNavbarItemProps) => {
   
   return (
     <>

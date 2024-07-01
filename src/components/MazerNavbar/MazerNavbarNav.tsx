@@ -1,14 +1,13 @@
 import React from "react";
-import { VerticalNavBarItem } from "..";
 
-interface VerticalNavbarNavProps {
+interface MazerNavbarProps {
   text?: string;
   title?: string;
   children?: React.ReactNode;
 }
 
-export const VerticalNavbarNav: React.FC<VerticalNavbarNavProps> = (
-  props: VerticalNavbarNavProps
+export const MazerNavbar: React.FC<MazerNavbarProps> = (
+  props: MazerNavbarProps
 ) => {
   return (
     <>
