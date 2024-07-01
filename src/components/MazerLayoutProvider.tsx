@@ -59,9 +59,9 @@ export const MazerLayoutProvider: React.FC<MazerLayoutProviderProps> = ({ childr
 
   return (
     <MazerLayoutContext.Provider value={{...config, toggleThemeTone:toggleTheme}}>
-      <div className={`app ${themeTone}`}>
+    
         {children}
-      </div>
+      
     </MazerLayoutContext.Provider>
   );
 };

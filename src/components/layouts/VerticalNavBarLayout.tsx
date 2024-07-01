@@ -8,7 +8,7 @@ export const VerticalNavBarLayout: React.FC = () => {
   return (
     <>
       <Sidebar logo={logo}>{sideBarContent}</Sidebar>
-      <div id="main">
+      <div id="main" className="layout-navbar navbar-fixed">
         <header>
           <nav className="navbar navbar-expand navbar-light navbar-top">
             <div className="container-fluid">
