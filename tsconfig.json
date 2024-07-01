@@ -5,7 +5,7 @@
       "path": "./tsconfig.app.json"
     },
     {
-      "path": "./tsconfig.build.json"
+     "path": "./tsconfig.build.json"
     }
   ],
   "compilerOptions": {

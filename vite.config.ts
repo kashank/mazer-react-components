@@ -27,6 +27,7 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@assets': path.resolve(__dirname, './src/assets'),
+      '@types': path.resolve(__dirname, './src/types'),
     }
   },
   build: {
@@ -37,6 +38,7 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ['react', 'react-dom'],
+      shimMissingExports:true,
       output: {
         globals: {
           react: 'React',

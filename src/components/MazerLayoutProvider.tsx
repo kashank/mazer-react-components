@@ -4,9 +4,9 @@ import '@assets/mazer/assets/compiled/css/app.css';
 import '@assets/mazer/assets/compiled/css/app-dark.css';
 import '@assets/mazer/assets/compiled/css/iconly.css';
 
-type MazerLayoutType = 'default' | 'single' | 'vertical-navbar';
+export type MazerLayoutType = 'default' | 'single' | 'vertical-navbar';
 
-interface MazerLayoutConfig {
+export interface MazerLayoutConfig {
   type: MazerLayoutType; 
   sideBarContent?: React.ReactNode;
   navBarContent?: React.ReactNode;
