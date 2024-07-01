@@ -32,34 +32,11 @@ export const VerticalNavBarLayout: React.FC = () => {
                 id="navbarSupportedContent"
               >
                 {navBarContent && 
-                <ul className="navbar-nav ms-auto mb-lg-0">
-                  {navBarContent}
-                </ul>
+                  navBarContent
+                
                 }
-                {/* <ul className="navbar-nav ms-auto mb-lg-0">
-                  <li className="nav-item dropdown me-1">
-                    <a
-                      className="nav-link active dropdown-toggle text-gray-600"
-                      href="#"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <i className="bi bi-envelope bi-sub fs-4"></i>
-                    </a>
-                    <ul
-                      className="dropdown-menu  dropdown-menu-lg-end"
-                      aria-labelledby="dropdownMenuButton"
-                    >
-                      <li>
-                        <h6 className="dropdown-header">Mail</h6>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="#">
-                          No new mail
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
+                {/*
+                
                   <li className="nav-item dropdown me-3">
                     <a
                       className="nav-link active dropdown-toggle text-gray-600"
