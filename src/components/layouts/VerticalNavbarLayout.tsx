@@ -1,18 +1,17 @@
 import * as React from "react";
-import { useLayout } from "../MazerLayoutProvider";
 import { Sidebar } from "../Sidebar";
-import { TypeGuard } from "../../types/TypeGuard";
+import { MazerNavbar } from "../MazerNavbar/MazerNavbar";
+import { SidebarItem, SidebarItemProps } from "../SidebarItem";
 
-export const VerticalNavbarLayout: React.FC = () => {
-  const  config  = useLayout() ;
-
-  if(!TypeGuard.isVerticalNavbarLayoutConfg(config)){
-    throw new Error("VerticalNavbarLayout must be used with vertical-navbar layout config");
-  }
-  
+interface VerticalNavbarLayoutProps {
+  sidebarItems: SidebarItemProps[];
+  navbar: typeof MazerNavbar;
+  children: React.ReactNode;
+}
+export const VerticalNavbarLayout: React.FC<VerticalNavbarLayoutProps> = ({sidebarItems, navbar, children}) => {
   return (
     <>
-      <Sidebar logo={config.logo}>{config.sideBarContent}</Sidebar>
+      <Sidebar sidebarItems={sidebarItems} />
       <div id="main" className="layout-navbar navbar-fixed">
         <header>
           <nav className="navbar navbar-expand navbar-light navbar-top">
@@ -36,85 +35,9 @@ export const VerticalNavbarLayout: React.FC = () => {
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
-                {
-                  config.navBarContent
-                }
+                <>{navbar}</>
                 {/*
                 
-                  <li className="nav-item dropdown me-3">
-                    <a
-                      className="nav-link active dropdown-toggle text-gray-600"
-                      href="#"
-                      data-bs-toggle="dropdown"
-                      data-bs-display="static"
-                      aria-expanded="false"
-                    >
-                      <i className="bi bi-bell bi-sub fs-4"></i>
-                      <span className="badge badge-notification bg-danger">
-                        7
-                      </span>
-                    </a>
-                    <ul
-                      className="dropdown-menu dropdown-center  dropdown-menu-sm-end notification-dropdown"
-                      aria-labelledby="dropdownMenuButton"
-                    >
-                      <li className="dropdown-header">
-                        <h6>Notifications</h6>
-                      </li>
-                      <li className="dropdown-item notification-item">
-                        <a className="d-flex align-items-center" href="#">
-                          <div className="notification-icon bg-primary">
-                            <i className="bi bi-cart-check"></i>
-                          </div>
-                          <div className="notification-text ms-4">
-                            <p className="notification-title font-bold">
-                              Successfully check out
-                            </p>
-                            <p className="notification-subtitle font-thin text-sm">
-                              Order ID #256
-                            </p>
-                          </div>
-                        </a>
-                      </li>
-                      <li className="dropdown-item notification-item">
-                        <a className="d-flex align-items-center" href="#">
-                          <div className="notification-icon bg-success">
-                            <i className="bi bi-file-earmark-check"></i>
-                          </div>
-                          <div className="notification-text ms-4">
-                            <p className="notification-title font-bold">
-                              Homework submitted
-                            </p>
-                            <p className="notification-subtitle font-thin text-sm">
-                              Algebra math homework
-                            </p>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <p className="text-center py-2 mb-0">
-                          <a href="#">See all notification</a>
-                        </p>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-                <div className="dropdown">
-                  <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                    <div className="user-menu d-flex">
-                      <div className="user-name text-end me-3">
-                        <h6 className="mb-0 text-gray-600">John Ducky</h6>
-                        <p className="mb-0 text-sm text-gray-600">
-                          Administrator
-                        </p>
-                      </div>
-                      <div className="user-img d-flex align-items-center">
-                        <div className="avatar avatar-md">
-                          <img src="./assets/compiled/jpg/1.jpg" />
-                        </div>
-                      </div>
-                    </div>
-                  </a>
                   <ul
                     className="dropdown-menu dropdown-menu-end"
                     aria-labelledby="dropdownMenuButton"
@@ -160,7 +83,7 @@ export const VerticalNavbarLayout: React.FC = () => {
         <div className="page-heading">
           <div className="page-title"></div>
           <section className="section"></section>
-          {config.mainContent}
+          {children}
         </div>
       </div>
     </>

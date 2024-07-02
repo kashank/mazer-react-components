@@ -6,33 +6,7 @@ import '@assets/mazer/assets/compiled/css/app.css';
 import '@assets/mazer/assets/compiled/css/app-dark.css';
 import '@assets/mazer/assets/compiled/css/iconly.css';
 
-export type MazerLayoutType = 'default' | 'single' | 'vertical-navbar';
-
-export interface BaseLayoutConfig {
-  mainContent: React.ReactNode;
-  logo?: string;
-}
-
-export interface DefaultLayoutConfig extends BaseLayoutConfig {
-  type: 'default';
-  sideBarContent?: React.ReactNode;
-}
-
-export interface SingleLayoutConfig extends BaseLayoutConfig {
-  type: 'single';
-  backLink?: string;
-}
-
-export interface VerticalNavbarLayoutConfig extends BaseLayoutConfig {
-  type: 'vertical-navbar';
-  sideBarContent?: React.ReactNode;
-  navBarContent?: React.ReactNode;
-  stickyNavbar?: boolean;
-}
-
-export type MazerLayoutConfig = DefaultLayoutConfig | SingleLayoutConfig | VerticalNavbarLayoutConfig;
-
-const MazerLayoutContext = React.createContext<MazerLayoutConfig | undefined>(undefined);
+const MazerLayoutContext = React.createContext(undefined);
 
 export const useLayout = () => {
   const context = React.useContext(MazerLayoutContext);
@@ -42,12 +16,11 @@ export const useLayout = () => {
   return context;
 };
 
-interface MazerLayoutProviderProps {
+interface MazerLayoutProviderProps{
   children: React.ReactNode;
-  config: VerticalNavbarLayoutConfig | DefaultLayoutConfig | SingleLayoutConfig;
 }
 
-export const MazerLayoutProvider: React.FC<MazerLayoutProviderProps> = ({ children, config }) => {
+export const MazerLayoutProvider: React.FC<MazerLayoutProviderProps> = ({children}) => {
   
 
   React.useEffect(() => {
@@ -65,12 +38,7 @@ export const MazerLayoutProvider: React.FC<MazerLayoutProviderProps> = ({ childr
   }, []);
 
   return (
-    <MazerLayoutContext.Provider value={{...config, type:(
-      config.type ?? 
-      'navBarContent' in config ? 'vertical-navbar' :
-      'backLink' in config ? 'single' : 
-      'default'
-    )}}>
+    <MazerLayoutContext.Provider value={undefined}>
         {children}
     </MazerLayoutContext.Provider>
   );

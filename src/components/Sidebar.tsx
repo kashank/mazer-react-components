@@ -2,31 +2,32 @@ import React from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { SidebarProvider } from "../contexts/SidebarContext";
 import { ThemeProvider } from "../contexts/ThemeContext";
+import { SidebarItem, SidebarItemProps } from "./SidebarItem";
 
 interface SidebarProps {
-  children: React.ReactNode;
+  sidebarItems: SidebarItemProps[];
   logo?: string;
 }
 
-export const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
+export const Sidebar: React.FC<SidebarProps> = ({ sidebarItems, logo }) => {
   return (
     <SidebarProvider>
       <div id="sidebar" className="active">
         <div className="sidebar-wrapper ps ps--active-y">
           <div className="sidebar-header position-relative">
             <div className="d-flex justify-content-between align-items-center">
-              {props.logo && (
+              {logo && (
                 <div className="logo">
                   <a href="index.html">
-                    <img src={props.logo} alt="Logo"></img>
+                    <img src={logo} alt="Logo"></img>
                   </a>
                 </div>
               )}
-              {!props.logo && <div className="navbar-brand ms-4"></div>}
+              {!logo && <div className="navbar-brand ms-4"></div>}
               <ThemeProvider>
                 <ThemeToggle />
               </ThemeProvider>
-              <div className="sidebar-toggler  x">
+              <div className="sidebar-toggler x">
                 <a href="#" className="sidebar-hide d-xl-none d-block">
                   <i className="bi bi-x bi-middle"></i>
                 </a>
@@ -34,7 +35,11 @@ export const Sidebar: React.FC<SidebarProps> = (props: SidebarProps) => {
             </div>
           </div>
           <div className="sidebar-menu">
-            <ul className="menu">{props.children}</ul>
+            <ul className="menu">
+              {sidebarItems.map((item, index) => (
+                <SidebarItem key={index} {...item} />
+              ))}
+            </ul>
           </div>
         </div>
       </div>

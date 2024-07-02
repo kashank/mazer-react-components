@@ -1,11 +1,11 @@
 import React from 'react';
 import { SidebarProvider, useSidebarContext } from '../contexts/SidebarContext';
 
-interface SidebarItemProps {
+export interface SidebarItemProps {
   title?: string;
   text?: string;
   href?: string;
-  children?: React.ReactNode;
+  children?: SidebarItemProps[];
 }
 
 export const SidebarItem: React.FC<SidebarItemProps> = (props: SidebarItemProps) => {
@@ -26,7 +26,12 @@ export const SidebarItem: React.FC<SidebarItemProps> = (props: SidebarItemProps)
             <a href="#" className={isSubItem ? 'submenu-link' : 'sidebar-link'}>
               <span>{props.text}</span>
             </a>
-            <ul className={`submenu ${nestingLevel > 0 ? `submenu-level-${nestingLevel+1} ` : ''}submenu-closed`}>{props.children}</ul>
+            <ul className={`submenu ${nestingLevel > 0 ? `submenu-level-${nestingLevel+1} ` : ''}submenu-closed`}>{props.children.map((sidebarItem,index)=>
+            <SidebarItem key={index}
+            href={sidebarItem.href}
+            text={sidebarItem.text}
+            children={sidebarItem.children} />
+            )}</ul>
           </>
         )}
       </li>

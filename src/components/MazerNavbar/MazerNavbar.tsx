@@ -6,9 +6,7 @@ interface MazerNavbarProps {
   children?: React.ReactNode;
 }
 
-export const MazerNavbar: React.FC<MazerNavbarProps> = (
-  props: MazerNavbarProps
-) => {
+export const MazerNavbar: React.FC<MazerNavbarProps> = (props: MazerNavbarProps) => {
   return (
     <>
       {

@@ -1,10 +1,10 @@
-export { MazerLayoutProvider, MazerLayoutType } from './MazerLayoutProvider';
+export { MazerLayoutProvider } from './MazerLayoutProvider';
 export {ThemeToggle} from './ThemeToggle';
 export {DefaultLayout} from './layouts/DefaultLayout';
 export {SingleLayout} from './layouts/SingleLayout';
 export {VerticalNavbarLayout as VerticalNavBarLayout} from './layouts/VerticalNavbarLayout';
 export {MazerNavbarItem} from './MazerNavbar/MazerNavbarItem';
-export {MazerNavbar} from './MazerNavbar/MazerNavbarNav';
+export {MazerNavbar} from './MazerNavbar/MazerNavbar';
 export {MazerNavbarDropdown} from './MazerNavbar/MazerNavbarDropDown';
-export {LayoutRenderer} from './LayoutRenderer';
 export {SidebarItem} from './SidebarItem';
+export {Sidebar} from './Sidebar';
