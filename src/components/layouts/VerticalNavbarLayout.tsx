@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Sidebar } from "../Sidebar";
-import { MazerNavbar } from "../MazerNavbar/MazerNavbar";
-import { SidebarItem, SidebarItemProps } from "../SidebarItem";
+import { MazerNavbar, MazerNavbarChildProps } from "../MazerNavbar/MazerNavbar";
+import { SidebarItemProps } from "../SidebarItem";
 
 interface VerticalNavbarLayoutProps {
   sidebarItems: SidebarItemProps[];
-  navbar: typeof MazerNavbar;
+  navbar: MazerNavbarChildProps[];
   children: React.ReactNode;
 }
 export const VerticalNavbarLayout: React.FC<VerticalNavbarLayoutProps> = ({sidebarItems, navbar, children}) => {
@@ -35,7 +35,7 @@ export const VerticalNavbarLayout: React.FC<VerticalNavbarLayoutProps> = ({sideb
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
-                <>{navbar}</>
+               <MazerNavbar children={navbar} />
                 {/*
                 
                   <ul

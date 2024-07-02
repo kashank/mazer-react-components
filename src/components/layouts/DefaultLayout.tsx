@@ -1,15 +1,16 @@
 import * as React from "react";
 import { Sidebar } from "../Sidebar";
+import { SidebarItemProps } from "../SidebarItem";
 
 interface DefaultLayoutProps{
-  sideBar: typeof Sidebar;
+  sidebarItems: SidebarItemProps[];
   children: React.ReactNode;
 }
 
-export const DefaultLayout: React.FC<DefaultLayoutProps> = (props: DefaultLayoutProps) => {
+export const DefaultLayout: React.FC<DefaultLayoutProps> = ({sidebarItems, children}) => {
   return (
     <>
-      {props.sideBar}
+      <Sidebar sidebarItems={sidebarItems} />
       <div id="main">
         <header className="mb-3">
           <a href="#" className="burger-btn d-block d-xl-none">
@@ -20,7 +21,7 @@ export const DefaultLayout: React.FC<DefaultLayoutProps> = (props: DefaultLayout
         <div className="page-heading">
           <div className="page-title"></div>
           <section className="section"></section>
-          {props.children}
+          {children}
         </div>
       </div>
     </>

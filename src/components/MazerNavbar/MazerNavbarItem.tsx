@@ -1,12 +1,11 @@
 import React from 'react';
+import { MazerNavbarChildProps } from './MazerNavbar';
 
-interface MazerNavbarItemProps {
+export interface MazerNavbarItemProps extends MazerNavbarChildProps {
   text?: string;
   href?: string;
-  icon?: string;
-  iconBackground?: string;
+  iconStyle?: string;
   subText?: string;
-  children?: React.ReactNode;
 }
 
 export const MazerNavbarItem: React.FC<MazerNavbarItemProps> = (props: MazerNavbarItemProps) => {
@@ -20,7 +19,7 @@ export const MazerNavbarItem: React.FC<MazerNavbarItemProps> = (props: MazerNavb
           
           <li className="dropdown-item notification-item">
             <a className="d-flex align-items-center" href={props.href}>
-              <div className={`notification-icon bg-${props.iconBackground ? props.iconBackground : 'primary'}`}>
+              <div className={`notification-icon bg-${props.iconStyle ? props.iconStyle : 'primary'}`}>
                 <i className={`bi bi-${props.icon}`}></i>
               </div>
               <div className="notification-text ms-4">
