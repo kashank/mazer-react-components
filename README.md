@@ -1,6 +1,6 @@
 # Mazer React Components
 
-> **Note**: This is a minor alpha release (0.0.6-alpha.5). This version is still in development and may contain bugs or incomplete features.
+> **Note**: This is a minor alpha release (0.0.6-alpha.6). This version is still in development and may contain bugs or incomplete features.
 
 This library is a wrapper for the open source bootstrap 5 theme [Mazer](https://github.com/zuramai/mazer) by [Saugi](https://github.com/zuramai). It provides a set of React components to help build consistent layouts and sidebars for your applications. It ensures that the end-implementing app doesn't have to worry about layout or design, providing a structured way to define sidebar items and layouts.
 
@@ -11,9 +11,9 @@ This library is a wrapper for the open source bootstrap 5 theme [Mazer](https://
 
 ## Features
 
-- **Layout Setup**: Use different layouts like `DefaultLayout`, `SingleLayout`, and `VerticalNavbarLayout`.
+- **Layout Setup**: Use different layouts like `DefaultLayout`, `SingleColumnLayout`, and `VerticalNavbarLayout`.
 - **Sidebar**: Define sidebars with nested sidebar items.
-- **Context Management**: Easily manage layout configurations using React Context.
+- **Context Management**: Easily manage theme configurations with React Context.
 
 ## Installation
 
@@ -23,291 +23,137 @@ To install the library, use npm or yarn:
 npm install mazer-react-components
 ```
 
-## Usage
-### Layout Setup
-To use a layout, wrap your page component with the LayoutProvider and specify the layout configuration.
+## Usage 
+### Initialization
+Wrap your app/page/etc component with the MazerContextProvider. Then wrap subsequent components with a layout. 
 
-#### Example
+#### Example usage
+
+##### App.tsx
 ```tsx
-import React from 'react';
-import { LayoutProvider } from 'mazer-react-components';
-import LayoutRenderer from 'mazer-react-components/LayoutRenderer';
-import SidebarItem from 'mazer-react-components/SidebarItem';
-
-const Home: React.FC = () => {
-  const layoutConfig = {
-    type: 'default',
-    sideBarContent: (
-      <>
-        <SidebarItem title="Main" />
-        <SidebarItem text="Dashboard" href="/dashboard" />
-        <SidebarItem text="Sub Menu">
-          <SidebarItem text="Sub Item 1" href="/sub-item-1" />
-          <SidebarItem text="Sub Item 2" href="/sub-item-2">
-            <SidebarItem text="Sub Sub Item 1" href="/sub-sub-item-1" />
-            <SidebarItem text="Sub Sub Item 2" href="/sub-sub-item-2" />
-          </SidebarItem>
-        </SidebarItem>
-      </>
-    ),
-    mainContent: (
-      <>
-        <h1>Home Page</h1>
-      </>
-    ),
-  };
-
-  return (
-    <LayoutProvider initialConfig={layoutConfig}>
-      <div className="container">
-        <LayoutRenderer />
-      </div>
-    </LayoutProvider>
-  );
-};
-
-export default Home;
-```
-### Different Layouts
-You can use different layout types by changing the type in the layout configuration.
-
-#### Default Layout
-```tsx
-const layoutConfig = {
-  type: 'single',
-  mainContent: (
-    <>
-      <h1>Single Column Page</h1>
-    </>
-  ),
-};
-
-```
-#### Single Column Layout
-```tsx
-const layoutConfig = {
-  type: 'single',
-  mainContent: (
-    <>
-      <h1>Single Column Page</h1>
-    </>
-  ),
-};
-```
-#### Vertical Navbar Layout
-```tsx
-const layoutConfig = {
-  type: 'vertical-navbar',
-  sideBarContent: (
-    <>
-      <SidebarItem text="Home" href="/" />
-      <SidebarItem text="About" href="/about" />
-    </>
-  ),
-  mainContent: (
-    <>
-      <h1>Vertical Navbar Page</h1>
-    </>
-  ),
-};
-```
-### Sidebars and Nested Sidebar Items
-
-Define Sidebars with nested items
-
-#### Example
-```tsx
-import React from 'react';
-import { Sidebar } from 'mazer-react-components';
-import SidebarItem from 'mazer-react-components/SidebarItem';
-
-const MySidebar: React.FC = () => (
-  <Sidebar>
-    <SidebarItem title="Main" />
-    <SidebarItem text="Dashboard" href="/dashboard" />
-    <SidebarItem text="Sub Menu">
-      <SidebarItem text="Sub Item 1" href="/sub-item-1" />
-      <SidebarItem text="Sub Item 2" href="/sub-item-2">
-        <SidebarItem text="Sub Sub Item 1" href="/sub-sub-item-1" />
-        <SidebarItem text="Sub Sub Item 2" href="/sub-sub-item-2" />
-      </SidebarItem>
-    </SidebarItem>
-  </Sidebar>
-);
-
-export default MySidebar;
-```
-
-## Advanced Usage
-### Higher Order Component (HOC)
-Simplify layout wrapping by encapsulating layout logic in an HOC.
-
-#### withLayout.tsx
-```tsx
-import React from 'react';
-import { LayoutProvider } from 'mazer-react-components';
-import LayoutRenderer from 'mazer-react-components/LayoutRenderer';
-import { LayoutConfig } from 'mazer-react-components/contexts/LayoutContext';
-
-const withLayout = (Component: React.ComponentType, layoutConfig: LayoutConfig) => {
-  return (props: any) => (
-    <LayoutProvider initialConfig={layoutConfig}>
-      <div className="container">
-        <LayoutRenderer />
-        <Component {...props} />
-      </div>
-    </LayoutProvider>
-  );
-};
-
-export default withLayout;
-```
-#### usage in pages
-```tsx
-import React from 'react';
-import withLayout from './hoc/withLayout';
-
-const Home: React.FC = () => (
-  <>
-    <h1>Home Page</h1>
-  </>
-);
-
-const SingleColumnPage: React.FC = () => (
-  <>
-    <h1>Single Column Page</h1>
-  </>
-);
-
-const homeLayoutConfig = {
-  type: 'default',
-  sideBarContent: <div>HI</div>,
-  mainContent: <div>Main Content for Home</div>,
-};
-
-const singleLayoutConfig = {
-  type: 'single',
-  mainContent: <div>Main Content for Single Column Page</div>,
-};
-
-export const HomeWithLayout = withLayout(Home, homeLayoutConfig);
-export const SingleColumnPageWithLayout = withLayout(SingleColumnPage, singleLayoutConfig);
-```
-
-### Centralize Layout Management with Routes
-Centralize layout configuration within routing logic.
-
-#### App.tsx
-```tsx
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './pages/Home';
-import SingleColumnPage from './pages/SingleColumnPage';
-import { LayoutProvider } from 'mazer-react-components/contexts/LayoutContext';
-import LayoutRenderer from 'mazer-react-components/LayoutRenderer';
-
-const routes = [
-  {
-    path: '/',
-    exact: true,
-    component: Home,
-    layoutConfig: {
-      type: 'default',
-      sideBarContent: <div>HI</div>,
-      mainContent: <div>Main Content for Home</div>,
-    },
-  },
-  {
-    path: '/single',
-    component: SingleColumnPage,
-    layoutConfig: {
-      type: 'single',
-      mainContent: <div>Main Content for Single Column Page</div>,
-    },
-  },
-];
+import React from "react";
+import Calculator from "./routes/Calculator";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home } from "./routes/Home";
+import { Dashboard } from "./routes/Dashboard";
+import { MazerContextProvider } from "mazer-react-components";
 
 const App: React.FC = () => {
+
+  const routes = [
+    {
+      path:'/',
+      exact: true,
+      component: Home,
+    },
+    {
+      path:'/dashboard',
+      exact: true,
+      component: Dashboard
+    },
+    {
+      path:'/calculator',
+      exact: true,
+      component: Calculator
+    },
+  ]
+
   return (
-    <Router>
-      <Switch>
-        {routes.map(({ path, exact, component: Component, layoutConfig }) => (
-          <Route
-            key={path}
-            path={path}
-            exact={exact}
-            render={(props) => (
-              <LayoutProvider initialConfig={layoutConfig}>
-                <div className="container">
-                  <LayoutRenderer />
-                  <Component {...props} />
-                </div>
-              </LayoutProvider>
-            )}
-          />
-        ))}
-      </Switch>
-    </Router>
+
+    <MazerContextProvider>
+      <BrowserRouter>
+        <Routes>
+          {
+            routes.map(({path, exact, component: Component})=>(
+              <Route
+                key={path}
+                path={path}
+                element={ 
+                  <Component />
+                } />
+            ))
+          }
+          </Routes>
+      </BrowserRouter>
+      </MazerContextProvider>
   );
 };
 
 export default App;
 ```
-### Custom Layout Wrapper Component
-Encapsulate layout configuration within a reusable component.
-
-#### LayoutWrapper.tsx
+##### Home.tsx
 ```tsx
-import React from 'react';
-import { LayoutProvider } from 'mazer-react-components/contexts/LayoutContext';
-import LayoutRenderer from 'mazer-react-components/LayoutRenderer';
-import { LayoutConfig } from 'mazer-react-components/contexts/LayoutContext';
+import React from "react";
+import { AppSidebar } from "../Sidebar";
+import { DefaultLayout } from "mazer-react-components";
 
-interface LayoutWrapperProps {
-  layoutConfig: LayoutConfig;
-  children: React.ReactNode;
-}
-
-const LayoutWrapper: React.FC<LayoutWrapperProps> = ({ layoutConfig, children }) => {
+export const Home: React.FC = () => {
   return (
-    <LayoutProvider initialConfig={layoutConfig}>
-      <div className="container">
-        <LayoutRenderer />
-        {children}
-      </div>
-    </LayoutProvider>
+    <DefaultLayout sidebarItems={AppSidebar}>
+      <h1>Hi from the home page</h1>
+    </DefaultLayout>
+  );
+};
+```
+
+##### Dashboard.tsx
+```tsx
+import React from "react";
+import { AppSidebar } from "../Sidebar";
+import { VerticalNavBarLayout } from "mazer-react-components";
+
+export const Dashboard: React.FC = () => {
+ 
+  return (
+    <VerticalNavBarLayout 
+      sidebarItems={AppSidebar} 
+      navbar={[
+        {
+          icon:"envelope",
+          badgeText:"8",
+          badgeStyle:'primary',
+          children:[
+            {text:"Link 1", href:"#"},
+            {text:"Link 2", href:"#"},
+            {text:"Link 3", icon:'envelope', iconStyle:'warning', subText:"The 3rd Link", href:"#"}
+          ]
+        },
+        {
+          icon:"cart",
+          children:[
+            {text:"Link 1", href:"#"},
+            {text:"Link 2", href:"#"},
+            {text:"Link 3", icon:'house', iconStyle:'success', subText:"The 3rd Link", href:"#"}
+          ]
+        }
+        ]}
+      >
+      <h1>Hi, I'm the Dashboard Page</h1>
+    </VerticalNavBarLayout>
+    
   );
 };
 
-export default LayoutWrapper;
 ```
 
-#### Usage in Pages
+##### Calculator.tsx
 ```tsx
-import React from 'react';
-import LayoutWrapper from './components/LayoutWrapper';
+import { SingleColumnLayout } from "mazer-react-components";
+import React from "react";
 
-const Home: React.FC = () => (
-  <LayoutWrapper layoutConfig={{
-    type: 'default',
-    sideBarContent: <div>HI</div>,
-    mainContent: <div>Main Content for Home</div>,
-  }}>
-    <h1>Home Page</h1>
-  </LayoutWrapper>
-);
+const Calculator: React.FC = () => {
+ 
+  return (
+    <SingleColumnLayout
+    backButtonLink="/">
+    <h1>Hi, I'm the Calculator Page</h1>
+    <p>I don't actually calculate anything</p>
+    </SingleColumnLayout>
+  );
+};
 
-const SingleColumnPage: React.FC = () => (
-  <LayoutWrapper layoutConfig={{
-    type: 'single',
-    mainContent: <div>Main Content for Single Column Page</div>,
-  }}>
-    <h1>Single Column Page</h1>
-  </LayoutWrapper>
-);
+export default Calculator;
 
-export { Home, SingleColumnPage };
 ```
-
 
 By using these components and configurations, you can easily set up and manage different layouts and sidebars in your application.
