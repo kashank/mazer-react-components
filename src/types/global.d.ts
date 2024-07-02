@@ -5,4 +5,3 @@ interface Window {
     const Sidebar: any;
     export default Sidebar;
   }
-  

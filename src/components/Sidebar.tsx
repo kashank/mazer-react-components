@@ -1,7 +1,6 @@
 import React from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { SidebarProvider } from "../contexts/SidebarContext";
-import { ThemeProvider } from "../contexts/ThemeContext";
 import { SidebarItem, SidebarItemProps } from "./SidebarItem";
 
 interface SidebarProps {
@@ -24,9 +23,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarItems, logo }) => {
                 </div>
               )}
               {!logo && <div className="navbar-brand ms-4"></div>}
-              <ThemeProvider>
-                <ThemeToggle />
-              </ThemeProvider>
+
+              <ThemeToggle />
+
               <div className="sidebar-toggler x">
                 <a href="#" className="sidebar-hide d-xl-none d-block">
                   <i className="bi bi-x bi-middle"></i>

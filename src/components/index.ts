@@ -1,4 +1,4 @@
-export { MazerLayoutProvider } from './MazerLayoutProvider';
+export { MazerContextProvider } from './MazerContextProvider';
 export {ThemeToggle} from './ThemeToggle';
 export {DefaultLayout} from './layouts/DefaultLayout';
 export {SingleColumnLayout} from './layouts/SingleColumnLayout';
