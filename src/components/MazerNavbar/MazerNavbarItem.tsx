@@ -44,22 +44,6 @@ export const MazerNavbarItem: React.FC<MazerNavbarItemProps> = (props: MazerNavb
               }
             </li>
         }
-      {/* <li className={`${(isSubItem ? `submenu-item` : `sidebar-${props.text ? `title` : `item`}`)} ${props.children ? `has-sub`:``}`}>
-        {props.href && (
-          <a href={props.href} className={isSubItem ? 'submenu-link' : 'sidebar-link'}>
-            {props.text}
-          </a>
-        )}
-         {!props.href && !props.children && props.text}
-        {props.children && (
-          <>
-            <a href="#" className={isSubItem ? 'submenu-link' : 'sidebar-link'}>
-              <span>{props.text}</span>
-            </a>
-            <ul className={`submenu ${isSubItem ? `submenu-level-${nestingLevel+1} ` : ''}submenu-closed`}>{props.children}</ul>
-          </>
-        )} 
-      </li> */}
       </>
   );
 };

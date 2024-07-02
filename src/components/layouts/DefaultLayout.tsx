@@ -1,14 +1,19 @@
 import * as React from "react";
 import { Sidebar } from "../Sidebar";
 import { useLayout } from "../MazerLayoutProvider";
+import { TypeGuard } from "../../types/TypeGuard";
 
 export const DefaultLayout: React.FC = () => {
-  const {sideBarContent, logo: sideBarLogo, mainContent } = useLayout();
+  const config = useLayout();
   
+  if(!TypeGuard.isDefaultConfig(config)){
+    throw new Error('DefaultLayout must be used with default layout config');
+  }
+
   return (
     <>
-      <Sidebar logo={sideBarLogo}>
-        {sideBarContent}
+      <Sidebar logo={config.logo}>
+        {config.sideBarContent}
       </Sidebar>
       <div id="main">
         <header className="mb-3">
@@ -20,7 +25,7 @@ export const DefaultLayout: React.FC = () => {
         <div className="page-heading">
           <div className="page-title"></div>
           <section className="section"></section>
-          {mainContent}
+          {config.mainContent}
         </div>
       </div>
     </>

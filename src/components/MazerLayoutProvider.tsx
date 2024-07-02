@@ -8,16 +8,29 @@ import '@assets/mazer/assets/compiled/css/iconly.css';
 
 export type MazerLayoutType = 'default' | 'single' | 'vertical-navbar';
 
-export interface MazerLayoutConfig {
-  type: MazerLayoutType; 
-  sideBarContent?: React.ReactNode;
-  navBarContent?: React.ReactNode;
+export interface BaseLayoutConfig {
   mainContent: React.ReactNode;
   logo?: string;
-  backLink?: string;
-  themeTone: string;
-  toggleThemeTone: () => void;
 }
+
+export interface DefaultLayoutConfig extends BaseLayoutConfig {
+  type: 'default';
+  sideBarContent?: React.ReactNode;
+}
+
+export interface SingleLayoutConfig extends BaseLayoutConfig {
+  type: 'single';
+  backLink?: string;
+}
+
+export interface VerticalNavbarLayoutConfig extends BaseLayoutConfig {
+  type: 'vertical-navbar';
+  sideBarContent?: React.ReactNode;
+  navBarContent?: React.ReactNode;
+  stickyNavbar?: boolean;
+}
+
+export type MazerLayoutConfig = DefaultLayoutConfig | SingleLayoutConfig | VerticalNavbarLayoutConfig;
 
 const MazerLayoutContext = React.createContext<MazerLayoutConfig | undefined>(undefined);
 
@@ -31,19 +44,11 @@ export const useLayout = () => {
 
 interface MazerLayoutProviderProps {
   children: React.ReactNode;
-  config: MazerLayoutConfig;
+  config: VerticalNavbarLayoutConfig | DefaultLayoutConfig | SingleLayoutConfig;
 }
 
 export const MazerLayoutProvider: React.FC<MazerLayoutProviderProps> = ({ children, config }) => {
-  const [themeTone, setThemeTone] = React.useState('light');
   
-  const toggleTheme = () => {
-    setThemeTone((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
-
-  React.useEffect(() => {
-    document.documentElement.setAttribute('data-bs-theme', themeTone);
-  }, [themeTone]);
 
   React.useEffect(() => {
     import('@assets/mazer/assets/static/js/components/sidebar.js')
@@ -60,10 +65,13 @@ export const MazerLayoutProvider: React.FC<MazerLayoutProviderProps> = ({ childr
   }, []);
 
   return (
-    <MazerLayoutContext.Provider value={{...config, toggleThemeTone:toggleTheme}}>
-    
+    <MazerLayoutContext.Provider value={{...config, type:(
+      config.type ?? 
+      'navBarContent' in config ? 'vertical-navbar' :
+      'backLink' in config ? 'single' : 
+      'default'
+    )}}>
         {children}
-      
     </MazerLayoutContext.Provider>
   );
 };

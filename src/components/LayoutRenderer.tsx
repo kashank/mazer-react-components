@@ -2,16 +2,16 @@ import React from 'react';
 import { useLayout } from './MazerLayoutProvider';
 import { DefaultLayout } from './layouts/DefaultLayout';
 import { SingleLayout } from './layouts/SingleLayout';
-import { VerticalNavBarLayout } from './layouts/VerticalNavBarLayout';
+import { VerticalNavbarLayout } from './layouts/VerticalNavbarLayout';
 
 export const LayoutRenderer: React.FC = () => {
-  const { type } = useLayout();
+  const config  = useLayout();
 
-  switch (type) {
+  switch (config.type) {
     case 'single':
       return <SingleLayout />;
     case 'vertical-navbar':
-      return <VerticalNavBarLayout />;
+      return <VerticalNavbarLayout />;
     case 'default':
     default:
       return <DefaultLayout />; 

@@ -1,13 +1,18 @@
 import * as React from "react";
 import { useLayout } from "../MazerLayoutProvider";
 import { Sidebar } from "../Sidebar";
+import { TypeGuard } from "../../types/TypeGuard";
 
-export const VerticalNavBarLayout: React.FC = () => {
-  const { mainContent, logo, sideBarContent, navBarContent } = useLayout();
+export const VerticalNavbarLayout: React.FC = () => {
+  const  config  = useLayout() ;
 
+  if(!TypeGuard.isVerticalNavbarLayoutConfg(config)){
+    throw new Error("VerticalNavbarLayout must be used with vertical-navbar layout config");
+  }
+  
   return (
     <>
-      <Sidebar logo={logo}>{sideBarContent}</Sidebar>
+      <Sidebar logo={config.logo}>{config.sideBarContent}</Sidebar>
       <div id="main" className="layout-navbar navbar-fixed">
         <header>
           <nav className="navbar navbar-expand navbar-light navbar-top">
@@ -31,9 +36,8 @@ export const VerticalNavBarLayout: React.FC = () => {
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
-                {navBarContent && 
-                  navBarContent
-                
+                {
+                  config.navBarContent
                 }
                 {/*
                 
@@ -156,7 +160,7 @@ export const VerticalNavBarLayout: React.FC = () => {
         <div className="page-heading">
           <div className="page-title"></div>
           <section className="section"></section>
-          {mainContent}
+          {config.mainContent}
         </div>
       </div>
     </>
