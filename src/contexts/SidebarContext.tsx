@@ -1,7 +1,10 @@
 import React, { createContext, useContext, ReactNode, useState } from 'react';
+import { SidebarItemProps } from '../components/SidebarItem';
 
 interface SidebarContextProps {
   nestingLevel: number;
+  sidebarItems: SidebarItemProps[];
+  setItems: (items: SidebarItemProps[]) => void;
 }
 
 const SidebarContext = createContext<SidebarContextProps | undefined>(undefined);
@@ -16,12 +19,15 @@ export const useSidebarContext = () => {
 
 interface SidebarProviderProps {
   children: React.ReactNode;
+  initialItems?: SidebarItemProps[];
   nestingLevel?: number;
 }
 
-export const SidebarProvider: React.FC<SidebarProviderProps> = ({ children, nestingLevel = 0 }) => {
+export const SidebarProvider: React.FC<SidebarProviderProps> = ({ children, initialItems = [], nestingLevel = 0 }) => {
+  const [sidebarItems, setItems] = useState<SidebarItemProps[]>(initialItems);
+
   return (
-    <SidebarContext.Provider value={{ nestingLevel }}>
+    <SidebarContext.Provider value={{ sidebarItems, setItems, nestingLevel }}>
       {children}
     </SidebarContext.Provider>
   );

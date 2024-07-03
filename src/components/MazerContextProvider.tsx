@@ -5,6 +5,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '@assets/mazer/assets/compiled/css/app.css';
 import '@assets/mazer/assets/compiled/css/app-dark.css';
 import '@assets/mazer/assets/compiled/css/iconly.css';
+import { SidebarProvider, useSidebarContext } from '../contexts/SidebarContext';
+import { SidebarItemProps } from './SidebarItem';
 
 interface MazerContextConfig {
   theme: string;
@@ -23,10 +25,10 @@ export const useTheme = () => {
 
 interface MazerContextProviderProps {
   children: React.ReactNode;
-  config: MazerContextConfig;
+  initialSidebarItems?: SidebarItemProps[];
 }
 
-export const MazerContextProvider: React.FC<MazerContextProviderProps> = ({ children }) => {
+export const MazerContextProvider: React.FC<MazerContextProviderProps> = ({ children, initialSidebarItems }) => {
   const [theme, setTheme] = React.useState(localStorage.getItem('theme') || 'light');
 
   const toggleTheme = () => {
@@ -57,7 +59,9 @@ export const MazerContextProvider: React.FC<MazerContextProviderProps> = ({ chil
 
   return (
     <MazerContext.Provider value={{ toggleTheme, theme }}>
+      <SidebarProvider initialItems={initialSidebarItems}>
       {children}
+      </SidebarProvider>
     </MazerContext.Provider>
   );
 };

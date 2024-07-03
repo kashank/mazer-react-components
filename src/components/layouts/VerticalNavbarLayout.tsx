@@ -2,16 +2,19 @@ import * as React from "react";
 import { Sidebar } from "../Sidebar";
 import { MazerNavbar, MazerNavbarChildProps } from "../MazerNavbar/MazerNavbar";
 import { SidebarItemProps } from "../SidebarItem";
+import { useSidebarContext } from "../../contexts/SidebarContext";
 
 interface VerticalNavbarLayoutProps {
-  sidebarItems: SidebarItemProps[];
+  sidebarItems?: SidebarItemProps[];
   navbar: MazerNavbarChildProps[];
   children: React.ReactNode;
 }
 export const VerticalNavbarLayout: React.FC<VerticalNavbarLayoutProps> = ({sidebarItems, navbar, children}) => {
+  const sidebar = useSidebarContext();
+
   return (
     <>
-      <Sidebar sidebarItems={sidebarItems} />
+      <Sidebar sidebarItems={sidebarItems ?? sidebar.sidebarItems} />
       <div id="main" className="layout-navbar navbar-fixed">
         <header>
           <nav className="navbar navbar-expand navbar-light navbar-top">

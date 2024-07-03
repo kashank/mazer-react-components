@@ -10,7 +10,7 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ sidebarItems, logo }) => {
   return (
-    <SidebarProvider>
+    
       <div id="sidebar" className="active">
         <div className="sidebar-wrapper ps ps--active-y">
           <div className="sidebar-header position-relative">
@@ -42,6 +42,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarItems, logo }) => {
           </div>
         </div>
       </div>
-    </SidebarProvider>
+    
   );
 };

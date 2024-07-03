@@ -1,16 +1,19 @@
 import * as React from "react";
 import { Sidebar } from "../Sidebar";
 import { SidebarItemProps } from "../SidebarItem";
+import { useSidebarContext } from "../../contexts/SidebarContext";
 
 interface DefaultLayoutProps{
-  sidebarItems: SidebarItemProps[];
+  sidebarItems?: SidebarItemProps[];
   children: React.ReactNode;
 }
 
 export const DefaultLayout: React.FC<DefaultLayoutProps> = ({sidebarItems, children}) => {
+  const sidebar = useSidebarContext();
+
   return (
     <>
-      <Sidebar sidebarItems={sidebarItems} />
+      <Sidebar sidebarItems={sidebarItems ?? sidebar.sidebarItems} />
       <div id="main">
         <header className="mb-3">
           <a href="#" className="burger-btn d-block d-xl-none">
