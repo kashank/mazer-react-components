@@ -12,7 +12,6 @@ export interface SidebarItemProps {
 export const SidebarItem: React.FC<SidebarItemProps> = ({isActive, href, text, title, children}: SidebarItemProps) => {
   const { nestingLevel, defaultItemIsActive } = useSidebarContext();
   const isSubItem = nestingLevel > 0;
-  console.log(`${text} is active ${isActive}`);
   const active = isActive ? isActive({href,text,title,children}) : defaultItemIsActive({href, text, title, children});
 
   return (
