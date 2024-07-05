@@ -6,7 +6,7 @@ import { useSidebarContext } from "../../contexts/SidebarContext";
 
 interface VerticalNavbarLayoutProps {
   sidebarItems?: SidebarItemProps[];
-  navbar: MazerNavbarChildProps[];
+  navbar: (React.ReactNode | MazerNavbarChildProps)[];
   children: React.ReactNode;
 }
 export const VerticalNavbarLayout: React.FC<VerticalNavbarLayoutProps> = ({sidebarItems, navbar, children}) => {

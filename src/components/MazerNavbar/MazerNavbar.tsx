@@ -7,10 +7,12 @@ export interface MazerNavbarChildProps {
 }
 
 export interface MazerNavbarProps {
-  children?: MazerNavbarChildProps[];
+  children?: (React.ReactNode | MazerNavbarChildProps)[];
 }
-const isDropdown = (item: MazerNavbarChildProps): item is MazerNavbarDropdownProps => {
-  return (item as MazerNavbarDropdownProps).children !== undefined;
+const isDropdown = (item: MazerNavbarChildProps | React.ReactNode): item is MazerNavbarDropdownProps => {
+  return (
+    typeof item === 'object' && 
+    (item as MazerNavbarDropdownProps).children !== undefined);
 };
 
 export const MazerNavbar: React.FC<MazerNavbarProps> = (props: MazerNavbarProps) => {
@@ -20,7 +22,12 @@ export const MazerNavbar: React.FC<MazerNavbarProps> = (props: MazerNavbarProps)
         <ul className="navbar-nav ms-auto mb-lg-0">
           {props.children &&
             props.children.map((item, index) => {
-              if (isDropdown(item)) {
+              if(React.isValidElement(item)){
+                return(
+                  <li key={index}>{item}</li>
+                )
+              }
+              else if (isDropdown(item)) {
                 const navItem = item as MazerNavbarDropdownProps;
                 return (
                   <MazerNavbarDropdown
