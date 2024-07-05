@@ -5,7 +5,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '@assets/mazer/assets/compiled/css/app.css';
 import '@assets/mazer/assets/compiled/css/app-dark.css';
 import '@assets/mazer/assets/compiled/css/iconly.css';
-import { SidebarProvider, useSidebarContext } from '../contexts/SidebarContext';
+
+import { SidebarProvider } from '../contexts/SidebarContext';
 import { SidebarItemProps } from './SidebarItem';
 
 interface MazerContextConfig {
@@ -26,9 +27,10 @@ export const useTheme = () => {
 interface MazerContextProviderProps {
   children: React.ReactNode;
   initialSidebarItems?: SidebarItemProps[];
+  sidebarItemIsActive?: (sidebarItem: SidebarItemProps)=>boolean;
 }
 
-export const MazerContextProvider: React.FC<MazerContextProviderProps> = ({ children, initialSidebarItems }) => {
+export const MazerContextProvider: React.FC<MazerContextProviderProps> = ({ children, initialSidebarItems, sidebarItemIsActive }) => {
   const [theme, setTheme] = React.useState(localStorage.getItem('theme') || 'light');
 
   const toggleTheme = () => {
@@ -44,23 +46,28 @@ export const MazerContextProvider: React.FC<MazerContextProviderProps> = ({ chil
   }, [theme]);
 
   React.useEffect(() => {
-    import('@assets/mazer/assets/static/js/components/sidebar.js')
-      .then((module) => {
-        if (module && module.default) {
-          const Sidebar = module.default;
+
+    import('@assets/mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.js')
+    .then((module) => {
+      const PerfectScrollbar = module.default || module;
+      import('@assets/mazer/assets/static/js/components/sidebar.js')
+        .then((module) => {
+          const Sidebar = module.default || module;
           const sidebarEl = document.getElementById('sidebar');
           if (sidebarEl) {
-            new Sidebar(sidebarEl);
+            new window.Sidebar(sidebarEl);
           }
-        }
-      })
-      .catch((error) => console.error('Error loading sidebar.js:', error));
+        })
+        .catch((error) => console.error('Error loading sidebar.js:', error));
+    })
+    .catch((error) => console.error('Error loading perfect-scrollbar.min.js:', error));
+  
   }, []);
 
   return (
     <MazerContext.Provider value={{ toggleTheme, theme }}>
-      <SidebarProvider initialItems={initialSidebarItems}>
-      {children}
+      <SidebarProvider initialItems={initialSidebarItems} sidebarItemIsActive={sidebarItemIsActive}>
+        {children}
       </SidebarProvider>
     </MazerContext.Provider>
   );

@@ -5,3 +5,7 @@ interface Window {
     const Sidebar: any;
     export default Sidebar;
   }
+  declare module '@assets/mazer/assets/extensions/perfect-scrollbar/perfect-scrollbar.js' {
+    const PerfectScrollbar: any;
+    export default PerfectScrollbar;
+  }

@@ -6,27 +6,33 @@ export interface SidebarItemProps {
   text?: string;
   href?: string;
   children?: SidebarItemProps[];
+  isActive?: (sidebarItem: SidebarItemProps) => boolean;
 }
 
-export const SidebarItem: React.FC<SidebarItemProps> = (props: SidebarItemProps) => {
-  const { nestingLevel } = useSidebarContext();
+export const SidebarItem: React.FC<SidebarItemProps> = ({isActive, href, text, title, children}: SidebarItemProps) => {
+  const { nestingLevel, defaultItemIsActive } = useSidebarContext();
   const isSubItem = nestingLevel > 0;
+  console.log(`${text} is active ${isActive}`);
+  const active = isActive ? isActive({href,text,title,children}) : defaultItemIsActive({href, text, title, children});
 
   return (
     <SidebarProvider nestingLevel={nestingLevel + 1}>
-      <li className={`${(isSubItem ? `submenu-item` : `sidebar-${props.title ? `title` : `item`}`)} ${props.children ? `has-sub`:``}`}>
-        {props.href && (
-          <a href={props.href} className={isSubItem ? 'submenu-link' : 'sidebar-link'}>
-            {props.text}
+      <li className={`${(isSubItem ? `submenu-item` : `sidebar-${title ? `title` : `item`}`)}${children ? ` has-sub`:``}${(active ? ' active':'')}`}>
+        {href && (
+          <a href={href} className={`${(isSubItem ? 'submenu-link' : 'sidebar-link')}`}>
+            {text}
           </a>
         )}
-        {!props.href && !props.children && props.text}
-        {props.children && (
+        {title && !href &&
+         <>{title}</>
+        }
+        {!href && !children && text}
+        {children && (
           <>
             <a href="#" className={isSubItem ? 'submenu-link' : 'sidebar-link'}>
-              <span>{props.text}</span>
+              <span>{text}</span>
             </a>
-            <ul className={`submenu ${nestingLevel > 0 ? `submenu-level-${nestingLevel+1} ` : ''}submenu-closed`}>{props.children.map((sidebarItem,index)=>
+            <ul className={`submenu ${nestingLevel > 0 ? `submenu-level-${nestingLevel+1} ` : ''}submenu-closed`}>{children.map((sidebarItem,index)=>
             <SidebarItem key={index}
             href={sidebarItem.href}
             text={sidebarItem.text}

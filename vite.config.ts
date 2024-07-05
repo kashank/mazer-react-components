@@ -18,8 +18,12 @@ export default defineConfig({
       targets: [
         {
           src: 'src/assets/mazer/assets/static/js/components/sidebar.js', 
-          dest: 'assets/static/js/components'
-        }
+          dest: 'assets/mazer/static/js/components'
+        },
+        {
+          src: 'src/assets/mazer/assets/extensions/perfect-scrollbar.js', 
+          dest: 'assets/mazer/extensions/perfect-scrollbar'
+        },
       ]
     })
   ],

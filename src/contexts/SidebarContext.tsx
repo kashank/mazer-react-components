@@ -5,6 +5,7 @@ interface SidebarContextProps {
   nestingLevel: number;
   sidebarItems: SidebarItemProps[];
   setItems: (items: SidebarItemProps[]) => void;
+  defaultItemIsActive: (sidebarItem: SidebarItemProps) => boolean;
 }
 
 const SidebarContext = createContext<SidebarContextProps | undefined>(undefined);
@@ -21,13 +22,15 @@ interface SidebarProviderProps {
   children: React.ReactNode;
   initialItems?: SidebarItemProps[];
   nestingLevel?: number;
+  sidebarItemIsActive?: (sidebarItem: SidebarItemProps) => boolean;
 }
 
-export const SidebarProvider: React.FC<SidebarProviderProps> = ({ children, initialItems = [], nestingLevel = 0 }) => {
+export const SidebarProvider: React.FC<SidebarProviderProps> = ({ children, initialItems = [], nestingLevel = 0, sidebarItemIsActive }) => {
   const [sidebarItems, setItems] = useState<SidebarItemProps[]>(initialItems);
+  const defaultIsActiveFn = sidebarItemIsActive || ((item: SidebarItemProps) => window.location.pathname === (item.href ?? ""));
 
   return (
-    <SidebarContext.Provider value={{ sidebarItems, setItems, nestingLevel }}>
+    <SidebarContext.Provider value={{ sidebarItems, setItems, nestingLevel, defaultItemIsActive: defaultIsActiveFn }}>
       {children}
     </SidebarContext.Provider>
   );
