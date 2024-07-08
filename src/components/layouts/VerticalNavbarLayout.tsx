@@ -9,7 +9,7 @@ interface VerticalNavbarLayoutProps {
   navbar: (React.ReactNode | MazerNavbarChildProps)[];
   children: React.ReactNode;
 }
-export const VerticalNavbarLayout: React.FC<VerticalNavbarLayoutProps> = ({sidebarItems, navbar, children}) => {
+export const VerticalNavbarLayout: React.FC<VerticalNavbarLayoutProps> = ({ sidebarItems, navbar, children }) => {
   const sidebar = useSidebarContext();
 
   return (
@@ -38,7 +38,7 @@ export const VerticalNavbarLayout: React.FC<VerticalNavbarLayoutProps> = ({sideb
                 className="collapse navbar-collapse"
                 id="navbarSupportedContent"
               >
-               <MazerNavbar children={navbar} />
+                <MazerNavbar children={navbar} />
                 {/*
                 
                   <ul
@@ -82,11 +82,12 @@ export const VerticalNavbarLayout: React.FC<VerticalNavbarLayoutProps> = ({sideb
             </div>
           </nav>
         </header>
-
-        <div className="page-heading">
-          <div className="page-title"></div>
-          <section className="section"></section>
-          {children}
+        <div id="main-content">
+          <div className="page-heading">
+            <div className="page-title"></div>
+            <section className="section"></section>
+            {children}
+          </div>
         </div>
       </div>
     </>
